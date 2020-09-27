@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security
+						http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 放行 -->
+<!--    <http pattern="/favicon.ico" security="none" />-->
+<!--    <http pattern="css/**" security="none" />-->
+    <http pattern="/login.html" security="none" />
+    <http pattern="/css/**" security="none" />
+    <http pattern="/img/**" security="none" />
+    <http pattern="/js/**" security="none" />
+    <http pattern="/plugins/**" security="none" />
+
+    <!-- 拦截条件（设定访问身份） -->
+    <http use-expressions="true" >
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <form-login login-page="/login.html"
+            default-target-url="/admin/index.html" always-use-default-target="true"
+            authentication-failure-url="/login.html"
+        />
+        <csrf disabled="true" />
+        <headers>
+            <frame-options policy="SAMEORIGIN" />
+        </headers>
+    </http>
+
+    <!-- 身份认证 -->
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" authorities="ROLE_USER" password="123" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

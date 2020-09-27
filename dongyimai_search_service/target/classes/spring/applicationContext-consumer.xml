@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 获取JMS的Factory -->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://myhost:61616" />
+    </bean>
+
+    <!-- 通过JMS的Factory获取Spring整合的Factory -->
+    <bean id="connectionJMSFactory" class="org.springframework.jms.connection.SingleConnectionFactory" >
+        <property name="targetConnectionFactory" ref="targetConnectionFactory" />
+    </bean>
+
+
+    <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="dongyimai-queue-solr" />
+    </bean>
+    <bean id="queueDelete" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="dongyimai-queue-solr-delete" />
+    </bean>
+
+    <bean id="myMessageListener" class="com.offcn.search.listener.MyMessageListener" />
+    <bean id="myMessageDeleteListener" class="com.offcn.search.listener.MyMessageDeleteListener" />
+
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer" >
+        <property name="connectionFactory" ref="connectionJMSFactory" />
+        <property name="destination" ref="queue" />
+        <property name="messageListener" ref="myMessageListener" />
+    </bean>
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer" >
+        <property name="connectionFactory" ref="connectionJMSFactory" />
+        <property name="destination" ref="queueDelete" />
+        <property name="messageListener" ref="myMessageDeleteListener" />
+    </bean>
+
+
+</beans>

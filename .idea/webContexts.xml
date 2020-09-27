@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/dongyimai_manager_web/src/main/webapp/admin/brand.html" value="file://$PROJECT_DIR$/dongyimai_manager_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/dongyimai_manager_web/src/main/webapp/admin/index.html" value="file://$PROJECT_DIR$/dongyimai_manager_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/dongyimai_page_web/src/main/webapp/149187842867997.html" value="file://$PROJECT_DIR$/dongyimai_page_web/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/dongyimai_seller_web/src/main/webapp/admin/goods_edit.html" value="file://$PROJECT_DIR$/dongyimai_seller_web/src/main/webapp/admin" />
+      </map>
+    </option>
+  </component>
+</project>
